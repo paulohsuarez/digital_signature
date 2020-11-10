@@ -1,0 +1,45 @@
+<div id="loginbox" class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+  <div class="panel panel-default " >
+
+    <div class="panel-heading">
+      <div class="panel-title">Alterar sua senha</div>
+    </div>
+
+    <div class="panel-body" >
+
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+        <%= devise_error_messages! %>
+        <%= f.hidden_field :reset_password_token %>
+
+        <div class="form-group">
+          <label class="col-md-2 col-xs-12 control-label">Nova senha:</label>
+            <div class="col-md-10 col-xs-12">        
+              <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                <%= f.password_field :password, autofocus: true, autocomplete: "off", :class => 'form-control', :placeholder => 'Digite a nova senha' %>
+              </div>   
+              <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> caracteres no mínimo)</em><br />
+                <% end %>                           
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-2 col-xs-12 control-label">Confirmar nova senha:</label>
+            <div class="col-md-10 col-xs-12">        
+              <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                <%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control', :placeholder => 'Confirme a nova senha' %>
+              </div>                            
+            </div>
+        </div>
+
+        <div class="form-group"><br>
+          <div class="col-md-12 col-xs-12 text-center">
+            <%= f.submit "Mudar minha senha", :class => 'btn btn-primary text-center' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

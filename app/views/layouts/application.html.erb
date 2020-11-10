@@ -1,14 +1,91 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DigitalSignature</title>
+    <title>Digital Signature</title>
+
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <% %w(bootstrap.min  Header-Blue font-awesome.min application ).each do |asset| %>
+        <%= stylesheet_link_tag asset %>
+    <% end %>
 
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag 'bootstrap.min' %>
+   
+
+  </head>
   <body>
-    <%= yield %>
+
+    <div class="row">
+        <% if user_signed_in? %>
+            <div class="col-lg-2 col-md-2"> 
+            
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-brand">
+                                Menu
+                        </li>
+                        <li>
+                            <%= link_to requests_url, class: 'link-red' do %><i class="fa fa-book fa-lg"> </i> Solicitações<% end %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-10 col-md-10 header-blue"> 
+        <% else %>
+            <div class="col-lg-12 col-md-12 header-blue"> 
+        <% end %>
+        
+
+            <nav class="navbar">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <p><%= link_to "Digital Signature", root_url %></p>
+                    </div>
+                    
+                    <div class="collapse navbar-collapse" >
+                        <p class="navbar-text navbar-right">
+                        <% if user_signed_in? %>
+                            <p class="navbar-text navbar-right">
+                                <%= link_to destroy_user_session_path, :method => :delete, class: 'btn btn-danger' do %>Sair<% end %>
+                            </p>
+                        <% end %>
+                        <% if admin_signed_in? %>
+                            <p class="navbar-text navbar-right">
+                                <%= link_to admin_session_path, @id => :user_id, class: 'btn btn-default' do %>Administração<% end %>
+                                <%= link_to destroy_admin_session_path, :method => :delete, class: 'btn btn-danger' do %>Sair<% end %>
+                            </p>
+                        <% end %>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="col-md-10 col-sm-10">
+                <% if notice %>
+                  <p class="alert alert-success"><%= notice %></p>
+                <% end %>
+                <% if alert %>
+                  <p class="alert alert-danger"><%= alert %></p>
+                <% end %>
+            </div>
+
+            <div class="container-fluid">
+                <% if user_signed_in? %>
+                    <p class="login"><b>Logado como:</b> <%= current_user.nome %></p>
+                <% end %>
+                <% if admin_signed_in? %>
+                    <p class="login"><b>Logado como:</b> <%= current_admin.email %></p>
+                <% end %>
+                <%= yield %>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-basic-centered">
+        <p class="footer-links">
+            <%= link_to "Página Inicial", root_url %>
+        </p>
+        <p class="footer-company-name">Desenvolvido por Paulo H C Suarez</p>
+    </footer>
   </body>
 </html>

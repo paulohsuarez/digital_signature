@@ -1,0 +1,28 @@
+<div id="loginbox" class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+	<div class="panel panel-default " >
+		<div class="panel-heading">
+            <div class="panel-title ">Esqueceu a senha?</div>
+        </div>
+
+        <div class="panel-body" >
+			<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+			  <%= devise_error_messages! %>
+			  <div class="form-group">
+                    <label class="col-md-2 col-xs-12 control-label">E-mail:</label>
+                    <div class="col-md-10 col-xs-12">        
+                       	<div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                            <%= f.email_field :email, autofocus: true, :class => 'form-control', :placeholder => 'Digite seu E-mail' %>
+                        </div>                              
+                    </div>
+                </div>
+
+                <div class="form-group"><br>
+                    <div class="col-md-12 col-xs-12 text-center">
+                        <%= f.submit "Enviar instruções para reativação da senha", :class => 'btn btn-primary' %>
+                    </div>
+                </div>
+			<% end %>
+		</div>
+	</div>
+</div>

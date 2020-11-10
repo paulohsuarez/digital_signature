@@ -1,0 +1,42 @@
+<div class="panel panel-default form-horizontal">
+
+  <div class="panel-heading">
+    <h3 class="panel-title">Solicitações</h3>
+  </div>
+
+  <% if !@requests.empty?%> 
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Documento</th>
+            <th>Estado</th>
+            <th>Data</th>
+            <th colspan="2">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @requests.each do |request| %>
+          <tr>
+            <td><%= request.document_file_name %></td>
+            <td><%= request.status %></td>
+            <td><%= request.created_at.strftime("%d/%m/%Y") %></td>
+            <td><%= link_to 'Visualizar', request %></td>
+            <% if can?  :destroy, Request %>
+              <td><%= link_to 'Excluir', request, method: :delete, data: { confirm: 'Deseja realmente excluir a Solicitação?' } %></td>
+            <% end %>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <span> <%= will_paginate @requests %></span>
+    </div>
+  <% end %>
+
+    <div class="text-center">
+      <%= link_to 'Nova Solicitação', new_request_path, :class =>"btn btn-success link" %>
+    </div>
+
+</div>
+
+

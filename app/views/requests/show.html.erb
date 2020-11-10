@@ -1,0 +1,31 @@
+<div class="panel panel-default form-horizontal">
+
+  <h3 class="panel-title">Solicitação</h3>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <tr>
+        <th>Signatário(s)</th>
+        <% @request.users.each do |user| %>
+          <td><%= user.nome %></td>
+        <% end %> 
+      </tr>
+      <tr>
+        <th>Documento</th>  
+          <td><%= link_to @request.document_file_name, @request.document.url, target: 'blank'%></td>
+      </tr>
+    </table>
+  </div>                                           
+
+  <div class="text-center">
+    <% if !@signed %>
+      <% if @request.status == "Pendente" %>
+        <%= link_to 'Assinar Documento', sign_url(request: @request), class: "btn btn-md btn-success" %>
+        <% if @request.status != "Aprovada" %>
+          <%= link_to 'Recusar Assinar', refuse_url(request: @request), class: "btn btn-md btn-danger" %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= link_to 'Voltar', requests_path, :class =>"btn btn-primary"  %>
+  </div>
+</div>

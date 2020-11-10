@@ -1,0 +1,48 @@
+<%= form_with(model: request, local: true) do |form| %>
+<% if request.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+  <ul>
+    <% request.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="panel-body">
+  <div class="form-group">
+    <label class="col-md-3 col-xs-12 control-label">Signatário(s)*</label>
+    <div class="col-md-6 col-xs-12">
+        <div class="input-group" id="formationSet">
+          <%= form.collection_select(:user_ids,  User.order(:nome), :id, :nome,{}, {multiple: true}) %>  
+      </div>
+    </div>
+  </div>
+  <!-- <div class="form-group">
+    <label class="col-md-3 col-xs-12 control-label"></label>
+    <div class="col-md-6 col-xs-12" id="button">
+      <a href="javascript:" id="sig" class="btn btn-primary"> Adicionar mais Signatários </a>
+      <a href="javascript:" class="btn btn-danger removeNewFormation"> Remover </a>
+    </div>
+  </div> -->
+
+  <div class="form-group">
+    <label class="col-md-3 col-xs-12 control-label">Documento (PDF)*</label>
+    <div class="col-md-6 col-xs-12">
+      <div class="input-group">
+        <%= form.file_field :document %>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="panel-footer">
+  <button class="btn btn-success link pull-right"><% form.submit "" %>Salvar</button>
+  <%= link_to 'Voltar', requests_path, :class =>"btn btn-primary link" %>
+</div>
+
+
+<% end %>

@@ -1,0 +1,38 @@
+<div class="col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-0">
+    <div class="panel panel-default form-horizontal">
+
+        <div class="panel-heading"> 
+            <h3 class="panel-title">Login</h3>
+        </div>
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                                                                        
+        <div class="panel-body">                    
+            <div class="form-group">
+                <label class="col-md-3 col-xs-12 control-label">Email*:</label>
+                <div class="col-md-6 col-xs-12">                                            
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                        <%= f.text_field :email, autofocus: true, class: "form-control", placeholder: "Email" %>
+                    </div>                                            
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 col-xs-12 control-label">Senha*:</label>
+                <div class="col-md-6 col-xs-12">                                            
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
+                         <%= f.password_field :password, autocomplete: "off", class: "form-control", id: 'pwd', placeholder: "Senha" %>
+                    </div>                                            
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-footer text-center">
+            <button type="submit" class="btn btn-success"><% f.submit "" %>Acessar</button>
+        </div>
+
+        <% end %>
+        
+    </div>                 
+</div>   
